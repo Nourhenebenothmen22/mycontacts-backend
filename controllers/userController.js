@@ -59,7 +59,17 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const currentUser = asyncHandler(async (req, res) => {
-  res.json({ message: 'User current data retrieved successfully' });
+  if (!req.user) {
+    res.status(401);
+    throw new Error('Not authorized');
+  }
+
+  res.status(200).json({
+    _id: req.user._id,
+    username: req.user.username,
+    email: req.user.email,
+  });
 });
+
 
 module.exports = { registerUser, loginUser, currentUser };
