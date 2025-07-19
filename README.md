@@ -22,22 +22,22 @@ Une API RESTful construite avec Node.js, Express et MongoDB pour gérer des cont
 - 🗂️ Upload d'image (via multer, stockage local)
 - 🧼 Sécurisation des inputs (mongo-sanitize, xss-clean)
 - ✅ Validation des données (express-validator)
+  
 
----
+📁 Structure des dossiers
 
-## 📁 Structure des dossiers
+| Dossier/Fichier | Description                                       |
+| --------------- | ------------------------------------------------- |
+| `config/`       | Connexion à MongoDB                               |
+| `controllers/`  | Logique métier (authentification & contacts)      |
+| `middleware/`   | Middlewares (auth, multer, validation, etc.)      |
+| `models/`       | Schémas Mongoose pour les entités (User, Contact) |
+| `routes/`       | Routes Express (utilisateurs, contacts)           |
+| `uploads/`      | Dossier de stockage pour les fichiers uploadés    |
+| `.env`          | Variables d’environnement (port, DB, JWT, etc.)   |
+| `server.js`     | Point d’entrée principal de l’application         |
+| `README.md`     | Documentation du projet                           |
 
-mycontacts-backend/
-│
-├── config/ # Connexion à MongoDB
-├── controllers/ # Logique métier (auth & contacts)
-├── middleware/ # Middlewares (auth, multer, validation)
-├── models/ # Schémas Mongoose (User, Contact)
-├── routes/ # Routes Express (auth, contacts)
-├── uploads/ # Dossier pour images uploadées
-├── .env # Variables d'environnement
-├── server.js # Point d'entrée de l'application
-└── README.md # Documentation
 
 ---
 
