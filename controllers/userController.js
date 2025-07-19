@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler'); 
 const User = require('../models/userModel'); 
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken'); // ✅ Corrigé ici
 
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
@@ -33,10 +34,32 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const loginUser = asyncHandler(async (req, res) => {
-    res.json({ message: 'User logged in successfully' });
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    res.status(400);
+    throw new Error('Email and password are required');
+  }
+
+  const user = await User.findOne({ email });
+
+  if (user && await bcrypt.compare(password, user.password)) {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '30d' });
+
+    return res.status(200).json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      token
+    });
+  } else {
+    res.status(401); // Unauthorized
+    throw new Error('Invalid email or password');
+  }
 });
 
 const currentUser = asyncHandler(async (req, res) => {
-    res.json({ message:'User current data retrieved successfully' });
+  res.json({ message: 'User current data retrieved successfully' });
 });
-module.exports = { registerUser, loginUser,currentUser };
+
+module.exports = { registerUser, loginUser, currentUser };
