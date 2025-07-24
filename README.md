@@ -41,12 +41,7 @@ Une API RESTful construite avec Node.js, Express et MongoDB pour gérer des cont
 
 ---
 
-## 📦 Installation
 
-1. **Cloner le projet**
-
-```bash
-git clone https://github.com/ton-utilisateur/mycontacts-backend.git
 
 🛠️ Endpoints principaux
 🔐 Authentification
